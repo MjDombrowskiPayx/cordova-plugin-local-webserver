@@ -27,9 +27,9 @@ var fs = require('fs');
 var path = require('path');
 var old_content_src_value;
 
-module.exports = function(context) {
+module.exports = function (context) {
     var config_xml = path.join(context.opts.projectRoot, 'config.xml');
-    var et = context.requireCordovaModule('elementtree');
+    var et = require('elementtree');
 
     var data = fs.readFileSync(config_xml).toString();
     var etree = et.parse(data);
@@ -48,15 +48,15 @@ module.exports = function(context) {
 
     var altcontentsrcTag = etree.findall("./preference[@name='AlternateContentSrc']");
     if (altcontentsrcTag.length > 0) {
-      try {
-         // elementtree 0.1.6
-         etree.getroot().remove(altcontentsrcTag[0]);
-      } catch (e) {
-         // elementtree 0.1.5
-         etree.getroot().remove(0, altcontentsrcTag[0]);
-      }
+        try {
+            // elementtree 0.1.6
+            etree.getroot().remove(altcontentsrcTag[0]);
+        } catch (e) {
+            // elementtree 0.1.5
+            etree.getroot().remove(0, altcontentsrcTag[0]);
+        }
     }
 
-    data = etree.write({'indent': 4});
+    data = etree.write({ 'indent': 4 });
     fs.writeFileSync(config_xml, data);
 }
