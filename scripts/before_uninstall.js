@@ -28,6 +28,8 @@ var path = require('path');
 var old_content_src_value;
 
 module.exports = function (context) {
+    console.log("In before_uninstall~~~~~~~~~~~~~");
+
     var config_xml = path.join(context.opts.projectRoot, 'config.xml');
     var et = require('elementtree');
 

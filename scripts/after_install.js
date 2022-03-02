@@ -28,6 +28,7 @@ var URI = require('url');
 var old_content_src_value;
 
 module.exports = function (context) {
+    console.log("In after_install~~~~~~~~~~~~~");
     var config_xml = path.join(context.opts.projectRoot, 'config.xml');
     var et = require('elementtree');
 
